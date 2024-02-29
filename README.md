@@ -1,36 +1,42 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+# Research Spike: Automated Web Performance in the Build Pipeline
 
-First, run the development server:
+## Context:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+This document outlines a research spike investigating the best approach to integrate automated web performance metrics into Mixcloud's build pipeline. The focus is on leveraging Lighthouse CI to obtain valuable performance insights early in the development process.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Current Approach:
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+As a proof of concept, Lighthouse CI was implemented within a test Next.js project, demonstrating the basic functionality (https://github.com/GoogleChrome/lighthouse-ci).
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+To run the `lhci` report locally:
+1. `npm install`
+2. `npm run build`
+3. `lhci autorun` (in root location)
 
-## Learn More
+## Buildkite Integration (Python Backend and Docker):
 
-To learn more about Next.js, take a look at the following resources:
+The proposed solution aims to integrate Lighthouse CI into our existing Buildkite pipeline:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. Pipeline Step: Create a dedicated step within the Buildkite pipeline to run Lighthouse CI tests.
+2. Script Execution: Use a Python script (since our backend uses Python) to execute the following steps:
+   - Pull the latest Lighthouse CI Docker image.
+   - Mount the project directory as a volume within the container.
+   - Run the Lighthouse CI tests using appropriate commands (refer to Lighthouse CI documentation for specifics).
+4. Reporting: Capture and store the generated Lighthouse reports for further analysis and visualization (e.g., upload to an artifact storage service, visualize metrics in dashboards).
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Challenges and Further Exploration:
 
-## Deploy on Vercel
+While the Lighthouse CI Docker image (https://github.com/GoogleChrome/lighthouse-ci/blob/main/docs/recipes/docker-client/Dockerfile) seemed promising, initial attempts encountered difficulties due to limited Docker experience. Further investigation into troubleshooting and configuration is required.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Next Steps:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Continue exploring Lighthouse CI Docker container configuration.
+Develop a comprehensive Python script for Buildkite integration.
+Implement unit tests for the Python script.
+Evaluate alternative tools for performance testing (e.g., WebPageTest).
+Document the final solution for easy deployment and maintenance.
+Disclaimer:
+
+This document reflects the initial stages of research and might require adjustments as further exploration unfolds.
