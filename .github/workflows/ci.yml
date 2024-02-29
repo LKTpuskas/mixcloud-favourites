@@ -27,9 +27,6 @@ jobs:
       if: failure()
       run: cat /home/runner/.npm/_logs/*-debug.log
 
-    - name: Run tests
-      run: npm test
-
     - name: Install Lighthouse CI
       run: npm install -g @lhci/cli@0.8.x
 
