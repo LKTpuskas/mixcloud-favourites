@@ -16,7 +16,25 @@ To run the `lhci` report locally:
 3. `lhci autorun` (in root location)
 
 Localhost lhci autorun example run
+
 ![image](https://github.com/LKTpuskas/mixcloud-favourites/assets/10063753/38169a83-4a7d-467c-9709-9cd35b6fd696)
+
+
+In github actions (there are some config missing here):
+
+![image](https://github.com/LKTpuskas/mixcloud-favourites/assets/10063753/7dfb6d19-2b1b-4712-b12c-50f9587784b7)
+
+
+ Thresholds for performance and accessibility categories in `.lighthouserc.js`
+```
+   assert: {
+      assertions: {
+        'categories:performance': ['error', {minScore: 0.9}],
+        'categories:accessibility': ['error', {minScore: 0.9}]
+      }
+    },
+```
+
 
 
 ## Buildkite Integration (Python Backend and Docker):
