@@ -12,6 +12,7 @@ jobs:
 
     env:
       LHCI_CHROME_FLAGS: "--no-sandbox --headless --disable-gpu"
+      DEBUG: "lighthouse,chrome-launcher"
 
     steps:
     - uses: actions/checkout@v2
