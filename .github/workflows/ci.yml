@@ -10,6 +10,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    env:
+      LHCI_NO_LIGHTHOUSERC: 1
+      LHCI_CHROME_FLAGS: "--no-sandbox --headless --disable-gpu"
+
     steps:
     - uses: actions/checkout@v2
 
