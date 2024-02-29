@@ -15,6 +15,10 @@ To run the `lhci` report locally:
 2. `npm run build`
 3. `lhci autorun` (in root location)
 
+Localhost lhci autorun example run
+![image](https://github.com/LKTpuskas/mixcloud-favourites/assets/10063753/38169a83-4a7d-467c-9709-9cd35b6fd696)
+
+
 ## Buildkite Integration (Python Backend and Docker):
 
 The proposed solution aims to integrate Lighthouse CI into our existing Buildkite pipeline:
